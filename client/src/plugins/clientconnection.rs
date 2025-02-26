@@ -1,5 +1,6 @@
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use avian3d::collision::Collider;
+use avian3d::prelude::RigidBody;
 use bevy::app::App;
 use bevy::math::{Dir3, Vec3};
 use bevy::prelude::{info, Added, Camera3d, Commands, Entity, Plugin, Query, Res, Startup, Transform, Update, With};
@@ -11,6 +12,7 @@ use lightyear::prelude::Replicated;
 use shared::{shared_config, PRIVATE_KEY, PROTOCOL_ID, SERVER_ADDR};
 use shared::protocol::{FloorMarker, ProtocolPlugin};
 use crate::plugins::renderer::RenderPlugin;
+use crate::plugins::replicateplugin::ReplicatePlugin;
 
 pub struct ClientConnectionPlugin;
 
@@ -46,7 +48,7 @@ fn setup_client_connection() -> ClientPlugins {
 
 impl Plugin for ClientConnectionPlugin{
     fn build(&self, app: &mut App) {
-        app.add_plugins((setup_client_connection(),ProtocolPlugin,RenderPlugin)).add_systems(Startup,connect_client).add_systems(
+        app.add_plugins((setup_client_connection(),ProtocolPlugin,ReplicatePlugin,RenderPlugin)).add_systems(Startup,connect_client).add_systems(
             Update,
             handle_new_floor,
         );
@@ -61,7 +63,7 @@ fn handle_new_floor(
     for entity in &character_query {
         commands
             .entity(entity)
-            .insert(Collider::cylinder(50.0, 0.1));
+            .insert((Collider::cylinder(50.0, 0.1),RigidBody::Static));
     }
 }
 

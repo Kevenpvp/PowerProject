@@ -1,4 +1,5 @@
 pub mod plugins;
+pub mod replicate;
 
 use avian3d::debug_render::PhysicsDebugPlugin;
 use avian3d::PhysicsPlugins;
