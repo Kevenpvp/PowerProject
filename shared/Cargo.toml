@@ -9,6 +9,6 @@ edition.workspace = true
 bevy = {workspace = true}
 avian3d = {workspace = true}
 bevy-inspector-egui = {workspace = true}
-lightyear = {workspace = true}
+lightyear = { workspace = true}
 serde = {workspace = true}
-
+leafwing-input-manager = {workspace = true}

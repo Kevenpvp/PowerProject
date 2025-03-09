@@ -12,3 +12,4 @@ shared = { path = "../shared" }
 bevy-inspector-egui = {workspace = true}
 lightyear = {workspace = true}
 serde = {workspace = true}
+leafwing-input-manager = {workspace = true}
