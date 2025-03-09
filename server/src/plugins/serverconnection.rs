@@ -7,8 +7,8 @@ use bevy::prelude::{default, Camera3d, Commands, Plugin, Startup, Transform};
 use lightyear::prelude::{NetworkTarget};
 use lightyear::prelude::server::{IoConfig, NetConfig, NetcodeConfig, Replicate, ReplicationTarget, ServerCommandsExt, ServerConfig, ServerPlugins, ServerTransport};
 use shared::{shared_config, PRIVATE_KEY, PROTOCOL_ID, REPLICATION_GROUP, SERVER_ADDR};
+use shared::globalcomponents::GameMask;
 use shared::protocol::{FloorMarker, ProtocolPlugin};
-use crate::plugins::combatantplugin::CombatantPlugin;
 
 pub struct ServerConnectionPlugin;
 
@@ -38,7 +38,7 @@ fn setup_server_connection() -> ServerPlugins{
 
 impl Plugin for ServerConnectionPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((setup_server_connection(),ProtocolPlugin,CombatantPlugin)).add_systems(Startup,start_server);
+        app.add_plugins((setup_server_connection(),ProtocolPlugin)).add_systems(Startup,start_server);
     }
 }
 
@@ -62,6 +62,7 @@ fn start_server(mut commands: Commands) {
         RigidBody::Static,
         Collider::cylinder(50.0, 0.1),
         FloorMarker,
+        GameMask::Default,
         Replicate{
             group: REPLICATION_GROUP,
             target: ReplicationTarget {

@@ -5,9 +5,14 @@ use lightyear::prelude::*;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 
 pub mod bundles;
-pub mod components;
-pub mod traits;
 pub mod protocol;
+pub mod globalcomponents;
+pub mod components;
+pub mod plugins;
+pub mod systems;
+pub mod globalevents;
+pub mod globalresources;
+
 pub const REPLICATION_GROUP: ReplicationGroup = ReplicationGroup::new_id(1);
 pub const SERVER_PORT: u16 = 2555;
 pub const PROTOCOL_ID: u64 = 1;

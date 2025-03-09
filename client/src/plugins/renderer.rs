@@ -1,5 +1,6 @@
 use bevy::app::App;
 use bevy::prelude::{info, Added, Assets, Color, Commands, Cylinder, Entity, Mesh, Mesh3d, MeshMaterial3d, Plugin, Query, ResMut, StandardMaterial, Update};
+use shared::globalcomponents::GameMask;
 use shared::protocol::FloorMarker;
 
 pub struct RenderPlugin;
@@ -21,6 +22,7 @@ fn add_floor_cosmetics(
         commands.entity(entity).insert((
             Mesh3d(meshes.add(Cylinder::new(50.0, 0.1))),
             MeshMaterial3d(materials.add(Color::WHITE)),
+            GameMask::Default
         ));
     }
 }

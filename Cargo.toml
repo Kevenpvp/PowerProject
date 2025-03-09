@@ -10,10 +10,11 @@ edition = "2021"
 
 [workspace.dependencies]
 bevy = { version = "0.15.3", features = ["dynamic_linking"] }
-avian3d = { git = "https://github.com/Jondolf/avian", branch = "main" }
+avian3d = {version = "0.2.0", default-features = true, features = ["serialize"]}
 bevy-inspector-egui = {version =  "0.29.1"}
-lightyear = { git = "https://github.com/cBournhonesque/lightyear.git", branch = "main"}
+lightyear = { git = "https://github.com/cBournhonesque/lightyear.git", branch = "main", features = ["avian3d","websocket","leafwing"]}
 serde = {version = "1.0.218"}
+leafwing-input-manager = {version = "0.16.0"}
 
 [profile.dev]
 opt-level = 1
